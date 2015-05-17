@@ -1,5 +1,5 @@
 {
-	"name": "ihsw/ToxiproxyBundle",
+	"name": "ihsw/toxiproxy-bundle",
 	"description": "Symfony bundle for ihsw/toxiproxy-php-client",
 	"license": "MIT",
 	"keywords": ["toxiproxy", "symfony", "bundle"],

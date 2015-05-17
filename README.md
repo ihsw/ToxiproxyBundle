@@ -1,4 +1,4 @@
-Toxiproxy PHP Client
+Toxiproxy Bundle
 ====================
 
 [![Build status](https://travis-ci.org/ihsw/ToxiproxyBundle.svg?branch=master)](https://travis-ci.org/ihsw/ToxiproxyBundle.svg?branch=master)

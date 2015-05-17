@@ -1,0 +1,21 @@
+{
+	"name": "ihsw/ToxiproxyBundle",
+	"description": "Symfony bundle for ihsw/toxiproxy-php-client",
+	"license": "MIT",
+	"keywords": ["toxiproxy", "symfony", "bundle"],
+	"authors": [
+		{
+			"name": "Adrian Parker",
+			"email": "ihsw.aparker@gmail.com"
+		}
+	],
+	"require": {
+		"ihsw/toxiyproxy-php-client": "1.0.2",
+		"symfony/framework-bundle": "2.6.7"
+	},
+	"autoload": {
+		"psr-4": {
+			"Ihsw\\Bundle\\ToxiproxyBundle\\": ""
+		}
+	}
+}

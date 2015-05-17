@@ -2,4 +2,5 @@
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
+
 class ToxiproxyBundle extends Bundle {}

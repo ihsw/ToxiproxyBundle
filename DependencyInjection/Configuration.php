@@ -1,4 +1,4 @@
-<?php namespace Ihsw\ToxiproxyBundle\DependencyInjection;
+<?php namespace Ihsw\Bundle\ToxiproxyBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder,
     Symfony\Component\Config\Definition\ConfigurationInterface;

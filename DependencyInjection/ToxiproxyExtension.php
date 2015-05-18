@@ -10,6 +10,7 @@ class ToxiproxyExtension extends Extension
 
     public function getConfiguration(array $config, ContainerBuilder $container)
     {
+    	throw new \Exception("NYI");
         return new Configuration();
     }
 }

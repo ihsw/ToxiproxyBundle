@@ -6,11 +6,11 @@ use Ihsw\Bundle\ToxiproxyBundle\DependencyInjection\Configuration;
 
 class ToxiproxyExtension extends Extension
 {
-    public function load(array $configs, ContainerBuilder $container) {}
-
-    public function getConfiguration(array $config, ContainerBuilder $container)
+    public function load(array $configs, ContainerBuilder $container)
     {
-    	throw new \Exception("NYI");
-        return new Configuration();
+    	$config = $this->processConfiguration(new Configuration(), $configs);
+    	foreach ($config as $key => $value) {
+    		$container->setParameter(sprintf("toxiproxy.%s", $key), $value);
+    	}
     }
 }

@@ -18,24 +18,37 @@ class SwiftmailerExtensionTest extends \PHPUnit_Framework_TestCase
         $container->registerExtension(new ToxiproxyExtension());
 
         // loading in the test config
-        $locator = new FileLocator(sprintf("%s/Fixtures/config/", __DIR__));
-        $loader = new YamlFileLoader($container, $locator);
+        $loader = new YamlFileLoader($container, new FileLocator(sprintf("%s/Fixtures/config/", __DIR__)));
         $loader->load($file);
-
-        // ????
-        $container->getCompilerPassConfig()->setOptimizationPasses([]);
-        $container->getCompilerPassConfig()->setRemovingPasses([]);
         $container->compile();
 
         return $container;
     }
 
     /**
-     * @expectedException Symfony\Component\DependencyInjection\Exception\ParameterNotFoundException
+     * @expectedException Symfony\Component\Config\Definition\Exception\InvalidConfigurationException
      */
     public function testBlank()
     {
-        $container = $this->loadContainerFromFile("blank.yml");
+        $this->loadContainerFromFile("blank.yml");
+    }
+
+    /**
+     * @expectedException Symfony\Component\DependencyInjection\Exception\ParameterNotFoundException
+     */
+    public function testNonexistent()
+    {
+        $container = $this->loadContainerFromFile("full.yml");
         $container->getParameter(self::NONEXISTENT_KEY);
+    }
+
+    public function testFull()
+    {
+        $container = $this->loadContainerFromFile("full.yml");
+        $this->assertEquals(
+            true,
+            $container->getParameter("toxiproxy.enabled"),
+            "Expected toxiproxy.enabled to be true"
+        );
     }
 }

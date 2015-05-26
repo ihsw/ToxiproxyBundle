@@ -1,2 +1,9 @@
 toxiproxy:
-    enabled: true
+    host: 127.0.0.1:8474
+    proxies:
+        ihsw_example_redis_master:
+            upstream: 127.0.0.1:6379
+            toxics:
+                bandwidth:
+                    enabled: true
+                    rate: 1000

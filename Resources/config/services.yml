@@ -1,3 +1,7 @@
 services:
+    guzzle:
+        class: GuzzleHttp\Client
+        arguments: [{ base_url: %toxiproxy.host% }]
     toxiproxy:
-        synthetic: true
+        class: Ihsw\Toxiproxy\Toxiproxy
+        arguments: [@guzzle]

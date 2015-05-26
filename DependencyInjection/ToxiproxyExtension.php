@@ -12,24 +12,23 @@ class ToxiproxyExtension extends Extension
 {
     public function load(array $configs, ContainerBuilder $container)
     {
+        // loading up the user config
+        $config = $this->processConfiguration(new Configuration(), $configs);
+        foreach ($config as $key => $value) {
+            $container->setParameter(sprintf("toxiproxy.%s", $key), $value);
+        }
+        
         // loading in the services config
         $loader = new YamlFileLoader($container, new FileLocator(sprintf("%s/../Resources/config/", __DIR__)));
         $loader->load("services.yml");
 
-        // loading up the user config
-        $config = $this->processConfiguration(new Configuration(), $configs);
-
-        // hooking up with toxiproxy
-        $toxiproxy = new Toxiproxy();
-        $toxiproxy->setHttpClient(new HttpClient(["base_url" => sprintf("http://%s", $config["host"])]));
+        // starting up the proxies
+        $toxiproxy = $container->get("toxiproxy");
         foreach ($config["proxies"] as $proxyName => $proxyParams) {
             $proxy = $toxiproxy->create($proxyName, $proxyParams["upstream"]);
             foreach ($proxyParams["toxics"] as $toxicName => $toxicParams) {
                 $proxy->updateDownstream($toxicName, $toxicParams);
             }
         }
-
-        // loading toxiproxy into the container
-        $container->set("toxiproxy", $toxiproxy);
     }
 }

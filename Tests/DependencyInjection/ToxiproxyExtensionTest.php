@@ -7,8 +7,6 @@ use Ihsw\Bundle\ToxiproxyBundle\DependencyInjection\ToxiproxyExtension;
 
 class ToxiproxyExtensionTest extends \PHPUnit_Framework_TestCase
 {
-    const NONEXISTENT_KEY = "toxiproxy.non-existent";
-
     private function loadContainerFromFile($file)
     {
         // starting up the container
@@ -31,15 +29,6 @@ class ToxiproxyExtensionTest extends \PHPUnit_Framework_TestCase
     public function testBlank()
     {
         $this->loadContainerFromFile("blank.yml");
-    }
-
-    /**
-     * @expectedException Symfony\Component\DependencyInjection\Exception\ParameterNotFoundException
-     */
-    public function ttestNonexistent()
-    {
-        $container = $this->loadContainerFromFile("full.yml");
-        $container->getParameter(self::NONEXISTENT_KEY);
     }
 
     public function testFull()

@@ -6,7 +6,7 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension,
     Symfony\Component\Config\FileLocator;
 use GuzzleHttp\Client as HttpClient;
 use Ihsw\Bundle\ToxiproxyBundle\DependencyInjection\Configuration,
-	Ihsw\Toxiproxy\Toxiproxy;
+    Ihsw\Toxiproxy\Toxiproxy;
 
 class ToxiproxyExtension extends Extension
 {
@@ -16,19 +16,19 @@ class ToxiproxyExtension extends Extension
         $loader = new YamlFileLoader($container, new FileLocator(sprintf("%s/../Resources/config/", __DIR__)));
         $loader->load("services.yml");
 
-    	// loading up the user config
-    	$config = $this->processConfiguration(new Configuration(), $configs);
+        // loading up the user config
+        $config = $this->processConfiguration(new Configuration(), $configs);
 
-    	// hooking up with toxiproxy
-    	$toxiproxy = new Toxiproxy(new HttpClient(["base_url" => sprintf("http://%s", $config["host"])]));
-    	foreach ($config["proxies"] as $proxyName => $proxyParams) {
-    		$proxy = $toxiproxy->create($proxyName, $proxyParams["upstream"]);
-    		foreach ($proxyParams["toxics"] as $toxicName => $toxicParams) {
-    			$proxy->updateDownstream($toxicName, $toxicParams);
-    		}
-    	}
+        // hooking up with toxiproxy
+        $toxiproxy = new Toxiproxy(new HttpClient(["base_url" => sprintf("http://%s", $config["host"])]));
+        foreach ($config["proxies"] as $proxyName => $proxyParams) {
+            $proxy = $toxiproxy->create($proxyName, $proxyParams["upstream"]);
+            foreach ($proxyParams["toxics"] as $toxicName => $toxicParams) {
+                $proxy->updateDownstream($toxicName, $toxicParams);
+            }
+        }
 
-    	// loading toxiproxy into the container
-    	$container->set("toxiproxy", $toxiproxy);
+        // loading toxiproxy into the container
+        $container->set("toxiproxy", $toxiproxy);
     }
 }

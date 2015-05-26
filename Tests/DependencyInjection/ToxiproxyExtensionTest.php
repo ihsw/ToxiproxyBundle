@@ -5,7 +5,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder,
     Symfony\Component\Config\FileLocator;
 use Ihsw\Bundle\ToxiproxyBundle\DependencyInjection\ToxiproxyExtension;
 
-class SwiftmailerExtensionTest extends \PHPUnit_Framework_TestCase
+class ToxiproxyExtensionTest extends \PHPUnit_Framework_TestCase
 {
     const NONEXISTENT_KEY = "toxiproxy.non-existent";
 

@@ -45,7 +45,7 @@ class SwiftmailerExtensionTest extends \PHPUnit_Framework_TestCase
     public function testFull()
     {
         $container = $this->loadContainerFromFile("full.yml");
-        // $toxiproxy = $container->get("toxiproxy");
-        // $toxiproxy->deleteAll();
+        $toxiproxy = $container->get("toxiproxy");
+        $toxiproxy->deleteAll();
     }
 }

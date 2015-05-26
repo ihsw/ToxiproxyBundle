@@ -10,7 +10,7 @@
 		}
 	],
 	"require": {
-		"ihsw/toxiyproxy-php-client": "1.0.2",
+		"ihsw/toxiyproxy-php-client": "1.0.3",
 		"symfony/framework-bundle": "2.6.7"
 	},
 	"require-dev": {

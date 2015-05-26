@@ -20,7 +20,8 @@ class ToxiproxyExtension extends Extension
         $config = $this->processConfiguration(new Configuration(), $configs);
 
         // hooking up with toxiproxy
-        $toxiproxy = new Toxiproxy(new HttpClient(["base_url" => sprintf("http://%s", $config["host"])]));
+        $toxiproxy = new Toxiproxy();
+        $toxiproxy->setHttpClient(new HttpClient(["base_url" => sprintf("http://%s", $config["host"])]));
         foreach ($config["proxies"] as $proxyName => $proxyParams) {
             $proxy = $toxiproxy->create($proxyName, $proxyParams["upstream"]);
             foreach ($proxyParams["toxics"] as $toxicName => $toxicParams) {
